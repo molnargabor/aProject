@@ -1,0 +1,85 @@
+<div layout="column" layout-fill>
+	<md-toolbar md-scroll-shrink class="md-shadow-bottom-z-1 md-hue-2">
+	    <div class="md-toolbar-tools">
+	    	<md-button class="md-icon-button" ng-click="back()">
+			  	<md-icon md-svg-src="img/icons/ic_arrow_back_24px.svg" aria-label="Vissza"></md-icon>
+			</md-button>
+			<h3 class="md-headline">{{ project.name }}</h3>
+	    </div>
+  	</md-toolbar>
+  	<md-content flex layout="column" layout-fill layout-padding class="ap-grey-bg">
+		<div layout="row" flex>
+			<!-- jobs -->
+			<div flex="33" layout-padding>
+				<div layout="row" layout-align="start center">
+					<h4 class="md-headline">Munkák</h4>
+					<md-button class="md-icon-button md-mini md-primary" ng-click="addJob()">
+					  	<md-icon md-svg-src="img/icons/ic_add_24px.svg" aria-label="Add"></md-icon>
+					</md-button>
+				</div>
+				<md-list>
+					<md-list-item class="md-whiteframe-2dp ap-wf-margin-bottom ap-white-bg" ng-click="getTasks(job.id)" ng-repeat="job in jobs" ng-class="{'md-whiteframe-9dp ap-active':clickedJob == job.id}">
+						<div layout="row" flex>
+							<div layout="column" layout-fill>
+								<div layout="row" flex layout-align="start center">
+									<h5 class="md-subhead">{{ job.name }}</h5>
+									<span flex></span>
+
+								</div>
+								<div layout="row" layout-align="start center">
+									<md-progress-linear md-mode="determinate" value="{{job.completeness}}"></md-progress-linear>
+									<span class="ap-percent-progress-linear">{{ job.completeness }}%</span>
+								</div>
+							</div>
+				  			<div style="width:64px">
+				  				<md-icon class="md-secondary" ng-click="editJob(job)" md-svg-src="img/icons/ic_settings_24px.svg" aria-label="Settings"></md-icon>
+				  			</div>
+						</div>
+					</md-list-item>
+				</md-list>
+			</div>
+			<div flex="33" layout-padding>
+				<!-- Tasks -->
+				<div layout="row" layout-align="start center" ng-show="clickedJob > -1" style="margin-bottom:8px">
+					<h4 class="md-headline">Részfeladatok</h4>
+					<md-button class="md-icon-button md-primary" ng-click="addTask()">
+					  	<md-icon md-svg-src="img/icons/ic_add_24px.svg" aria-label="Add"></md-icon>
+					</md-button>
+				</div>
+				<!-- <div layout-padding> -->
+					<md-whiteframe class="md-whiteframe-2dp ap-wf-margin-bottom ap-white-bg" ng-repeat="task in tasks" flex layout layout-align="start center" layout-padding>
+						<div layout="column" layout-fill>
+							<div layout="row">
+								<h5 class="md-body-2" flex>{{ task.name }}</h5>
+								<!-- <span flex></span> -->
+								<md-button class="md-icon-button" ng-click="editTask()">
+								  	<md-icon md-svg-src="img/icons/ic_mode_edit_24px.svg" aria-label="Edit task"></md-icon>
+								</md-button>
+							</div>
+							<md-divider></md-divider>
+							<div layout="row" layout-align="start center">
+								<p flex="50">
+									<md-icon md-svg-src="img/icons/ic_schedule_24px.svg" aria-label="Grafikai óra"></md-icon>
+									<md-button class="md-icon-button" ng-click="decHours()" ng-disabled="task.hours <= 0">
+									  	<md-icon md-svg-src="img/icons/ic_remove_24px.svg" aria-label="Decrement hours"></md-icon>
+									</md-button>
+									{{ task.hours }}
+									<md-button class="md-icon-button" ng-click="incHours()">
+									  	<md-icon md-svg-src="img/icons/ic_add_24px.svg" aria-label="Increment hours"></md-icon>
+									</md-button>
+								</p>
+								<p flex="30">
+									<md-icon ng-if="task.deadline" md-svg-src="img/icons/ic_alarm_24px.svg" aria-label="Deadline"></md-icon> {{ task.deadline | date:'yyyy.MM.dd.' }}
+								</p>
+								<p flex></p>
+								<p>
+									<md-switch ng-model="task.done" aria-label="Kész?"></md-switch>
+								</p>
+							</div>
+						</div>
+					</md-whiteframe>
+				<!-- </div> -->
+			</div>
+   		</div>
+   	</md-content>
+</div>

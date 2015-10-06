@@ -1,0 +1,36 @@
+<md-dialog>
+	<md-dialog-content>
+		<form>
+			<md-input-container>
+			 	<md-select ng-model="contactData.client_id" placeholder="Ügyfél (kötelező)" aria-label="Select client" ng-required="true">
+					<md-option ng-value="client.id" ng-repeat="client in clients">{{ client.name }}</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container>
+				<md-icon md-svg-src="img/icons/ic_person_24px.svg"></md-icon>
+				<input type="text" placeholder="Név (kötelező)" ng-model="contactData.name" ng-required="true" md-autofocus="">
+			</md-input-container>
+			<md-input-container>
+				<md-icon md-svg-src="img/icons/ic_info_24px.svg"></md-icon>
+				<input type="text" placeholder="Beosztás" ng-model="contactData.titel">
+			</md-input-container>
+			<md-input-container>
+				<md-icon md-svg-src="img/icons/ic_email_24px.svg"></md-icon>
+				<input type="email" placeholder="E-mail (kötelező)" ng-model="contactData.email" ng-required="true">
+			</md-input-container>
+			<md-input-container>
+				<md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+				<input type="text" placeholder="Telefon" ng-model="contactData.tel">
+			</md-input-container>
+		</form>
+	</md-dialog-content>
+	<div class="md-actions" layout="row">
+		<span flex></span>
+		<md-button class="md-icon-button" ng-click="closeDialog()" aria-label="Close dialog">
+			<md-icon md-svg-icon="img/icons/ic_close_24px.svg"></md-icon>
+		</md-button>
+		<md-button class="md-icon-button md-accent" ng-click="saveContact()" aria-label="Save contact">
+			<md-icon md-svg-icon="img/icons/ic_check_24px.svg"></md-icon>
+		</md-button>
+	<div>
+<md-dialog>

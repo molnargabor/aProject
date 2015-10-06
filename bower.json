@@ -1,0 +1,21 @@
+{
+  "name": "aProject",
+  "version": "0.0.0",
+  "authors": [
+    "molnargabor <mg@molnargabor.info>"
+  ],
+  "description": "Artworxx Projecthandler",
+  "main": "index.html",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-dreamfactory": "~1.5.1",
+    "angular-material": "0.11",
+    "angular-route": "~1.4.5",
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4"
+  },
+  "resolutions": {
+    "angular-material": "0.11"
+  }
+}

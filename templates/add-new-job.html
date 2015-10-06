@@ -1,0 +1,19 @@
+<md-dialog aria-label="New/Edit Job">
+	<md-dialog-content>
+		<form>
+			<md-input-container>
+				<label>Job neve</label>
+				<input type="text" ng-model="jobData.name" md-autofocus="">
+			</md-input-container>
+		</form>
+	</md-dialog-content>
+	<div class="md-actions" layout="row">
+	<span flex></span>
+		<md-button ng-click="closeDialog()" aria-label="Close dialog">
+			<!-- <md-icon md-svg-icon="img/icons/ic_close_24px.svg"></md-icon> -->Mégse
+		</md-button>
+		<md-button ng-click="saveJob()" aria-label="Save job">
+			<!-- <md-icon md-svg-icon="img/icons/ic_check_24px.svg"></md-icon> -->OK
+		</md-button>
+	<div>
+<md-dialog>

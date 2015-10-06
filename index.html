@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="hu" ng-app="aProject">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Title Page</title>
+
+		<!-- Bootstrap CSS -->
+		<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
+
+		<!-- Bower components -->
+		<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="bower_components/angular-material/angular-material.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+		<link href="css/style.min.css" rel="stylesheet">
+		<link href="css/layout.min.css" rel="stylesheet">
+
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+		<!-- Angular -->
+		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/angular-dreamfactory/angular-dreamfactory.js"></script>
+		<script src="bower_components/angular-route/angular-route.min.js"></script>
+		<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+		<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+		<script src="bower_components/angular-material/angular-material.min.js"></script>
+		
+		<script src="js/mysql_crud_api_transform.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/controllers.js"></script>
+		<script src="js/services.js"></script>
+	</head>
+	<body layout="row" ng-controller="AppCtrl">
+		<div layout="column" layout-fill>
+		    <md-toolbar md-scroll-shrink class="md-shadow-bottom-z-1 ap-site-toolbar">
+		      <div class="md-toolbar-tools" layout-align="start center">
+		      	<img src="img/Artworxx_logo_Simple_Creative-1.svg" style="height:50px" alt="" />
+		      	<span flex="5"></span>
+		      	<md-button class="ap-white-text" ng-click="navigateMe('projects', '')">
+		      		Projektek
+		      	</md-button>
+		      	<span flex></span>
+		        <md-menu>
+			      <md-button aria-label="Open settings menu" class="md-icon-button" ng-click="$mdOpenMenu()">
+			        <md-icon md-menu-origin md-svg-icon="img/icons/ic_settings_white_24px.svg"></md-icon>
+			      </md-button>
+			      <md-menu-content width="4">
+			        <md-menu-item>
+			          <md-button ng-click="navigateMe('clients', '')">
+			            Ügyfelek
+			          </md-button>
+			        </md-menu-item>
+			        <md-menu-item>
+			          <md-button ng-click="navigateMe('contacts', '')">
+			            Kapcsolatok
+			          </md-button>
+			        </md-menu-item>
+			      </md-menu-content>
+			    </md-menu>
+		      </div>
+		    </md-toolbar>
+			<md-content flex ng-view class="ap-grey-bg"></md-content>
+		</div>
+
+		<!-- jQuery -->
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	</body>
+</html>
