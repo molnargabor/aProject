@@ -36,6 +36,10 @@ aProject.config(['$routeProvider', function ($routeProvider) {
 		templateUrl: 'templates/projects.html',
 		controller: 'ProjectsCtrl'
 	})
+	.when('/newsletters', {
+		templateUrl: 'templates/newsletters.html',
+		controller: 'NewslettersCtrl'
+	})
 	.when('/projects/:id', {
 		templateUrl: 'templates/projectdetails.html',
 		controller: 'ProjectdetailsCtrl'

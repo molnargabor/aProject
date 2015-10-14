@@ -39,6 +39,56 @@ apServices.factory('dbAPI', ['$http', function ($http) {
 	};
 }]);
 
+apServices.factory('NLService', ['$http', function ($http) {
+	var _url = 'https://mandrillapp.com/api/1.0/';
+	var _apikey = 'VuBhRmZCdCf6KNk0joUNLw';
+
+	var _getTemplates = function (){
+		return $http.post(
+			_url + '/templates/list.json', 
+			{
+			    "key": _apikey
+			}
+		);
+	}
+
+	var _sendNewsletter = function (nlObj){
+		return $http.post(
+			_url + '/messages/send-template.json', 
+			{
+			    "key": _apikey,
+			    "template_name": nlObj.template,
+			    "template_content": [
+			        {
+			            "name": "email_body",
+			            "content": nlObj.email_body
+			        }
+			    ],
+			    "message": {
+			        "html": "<p>" + nlObj.email_body + "</p>",
+			        "text": nlObj.email_body,
+			        "subject": nlObj.subject,
+			        "to": nlObj.recipients,
+			        "headers": {
+			            "Reply-To": "office@artworxx.hu"
+			        },
+				    "global_merge_vars": [
+			            {
+			                "name": "email_body",
+				            "content": nlObj.email_body
+			            }
+			        ]
+			    }
+			}
+		);
+	}
+
+	return {
+		getTemplates: _getTemplates,
+		sendNewsletter: _sendNewsletter
+	};
+}])
+
 apServices.factory('Timestamp', [function () {
 	var _getTimeStamp = function (){
 		return Date.now();

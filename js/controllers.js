@@ -9,6 +9,9 @@ apControllers.controller('AppCtrl', ['$scope', '$location', function ($scope, $l
 			case 'projects':
 				$location.url('/projects' + params);
 				break;
+			case 'newsletters':
+				$location.url('/newsletters' + params);
+				break;
 			case 'clients':
 				$location.url('/clients' + params);
 				break;
@@ -207,6 +210,93 @@ apControllers.controller('ProjectdetailsCtrl', ['$scope', '$location', '$window'
 
 	//init
 	$scope.getJobs();
+}]);
+
+// NewslettersCtrl
+apControllers.controller('NewslettersCtrl', ['$scope', '$http', '$log', 'dbAPI', 'NLService', 
+	function ($scope, $http, $log, dbAPI, NLService) {
+	
+	$scope.templates = {};
+	$scope.newsletters = {};
+	$scope.recipients = {};
+	$scope.newNewsletter = {};
+	$scope.newNewsletter.recipients = [];
+	$scope.newNewsletter.sent = null;
+
+	$scope.getNewsletters = function (){
+		dbAPI.getRecords('newsletters', true).then(
+			function (success){ 
+				$scope.newsletters = success.data.newsletters;
+				//$log.log(success.data); 
+			}, 
+			function (error){ $log.log(error); }
+		);
+	}
+
+	$scope.getTemplates = function (){
+		NLService.getTemplates().then(
+			function (success){
+				$scope.templates = success.data;
+				//$log.log(success);
+			}, 
+			function (error){
+				$log.log(error);
+			}
+		);
+	}
+
+	$scope.getRecipients = function (){
+		$http.get('newsletter/recipients.json').then(
+			function (success){
+				$scope.recipients = success.data;
+				//$log.log(success);
+			},
+			function (error){
+				$log.log(error);
+			}
+		);
+	}
+
+	$scope.saveNewsletter = function (){
+		/*angular.forEach($scope.recipients, function (obj, index){
+			if(obj.selected){
+				$scope.newNewsletter.recipients
+					.push(obj.email);
+			}
+		});*/
+		//$log.log($scope.newNewsletter);
+		delete $scope.newNewsletter.recipients;
+		dbAPI.addRecord('newsletters', $scope.newNewsletter)
+				.then(
+					function (success){
+						$log.log(success);
+					}, 
+					function (error){ $log.log(error); }
+				);
+	}
+
+	$scope.sendNewsletter = function (){
+		angular.forEach($scope.recipients, function (obj, index){
+			if(obj.selected){
+				$scope.newNewsletter.recipients
+					.push({"email":obj.email, "type":"to"});
+			}
+		});
+		NLService.sendNewsletter($scope.newNewsletter)
+			.then(
+				function (success){
+					$log.log(success);
+				},
+				function (error){
+					$log.log(error);
+				}
+			);
+	}
+
+	$scope.getNewsletters();
+	$scope.getTemplates();
+	$scope.getRecipients();
+
 }]);
 
 // ClientSettingsCtrl
